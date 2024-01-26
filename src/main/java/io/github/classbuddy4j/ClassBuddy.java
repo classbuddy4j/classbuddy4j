@@ -20,8 +20,14 @@ public class ClassBuddy {
     private Method targetMethod;
     private Object interceptor;
     private Class<?> interceptorClass;
+    private boolean verbose = false;
 
     public ClassBuddy() { }
+
+    public ClassBuddy verbose(boolean enabled) {
+        this.verbose = enabled;
+        return this;
+    }
 
     public ClassBuddy redefineMethod(Method method, Object interceptor) {
         Class<?> clazz = (interceptor instanceof Class) ? (Class<?>) interceptor : interceptor.getClass();
@@ -38,10 +44,15 @@ public class ClassBuddy {
         return this;
     }
 
-    public void apply() {
-        final Instrumentation instrumentation = ByteBuddyAgent.install();
+    public void install() {
+        installOn(ByteBuddyAgent.install());
+    }
 
-        ByteBuddyUtil.injectBootstrapClasses(instrumentation, interceptorClass);
+    protected void installOn(final Instrumentation instrumentation) {
+
+        if (isBootstrap(this.targetMethod)) {
+            ByteBuddyUtil.injectBootstrapClasses(instrumentation, interceptorClass);
+        }
 
         final Class<?> targetClass = this.targetMethod.getDeclaringClass();
 
@@ -56,8 +67,11 @@ public class ClassBuddy {
 
         final ByteBuddy byteBuddy = new ByteBuddy().with(Implementation.Context.Disabled.Factory.INSTANCE);
 
+        final AgentBuilder.Listener agentBuilderListener = (this.verbose) ? (AgentBuilder.Listener.StreamWriting.toSystemOut()) : AgentBuilder.Listener.NoOp.INSTANCE;
+
         final AgentBuilder agentBuilder = new AgentBuilder.Default()
                 .with(byteBuddy)
+                .with(agentBuilderListener)
                 .ignore(none())
                 .disableClassFormatChanges()
                 .with(AgentBuilder.RedefinitionStrategy.REDEFINITION)
@@ -67,6 +81,10 @@ public class ClassBuddy {
                 .transform(transformer);
 
         agentBuilder.installOn(instrumentation);
+    }
+
+    static private boolean isBootstrap(final Method m) {
+        return (m.getDeclaringClass().getClassLoader() == null);
     }
 
 }

@@ -14,7 +14,7 @@ public class ClassBuddyTest {
         Method m = System.class.getMethod("getenv", String.class);
         new ClassBuddy()
                 .redefineMethod(m, GetEnvInterceptor.class)
-                .apply();
+                .install();
         assertEquals("Hello whatever", System.getenv("whatever"));
     }
 
@@ -24,7 +24,7 @@ public class ClassBuddyTest {
         Method m = System.class.getMethod("currentTimeMillis");
         new ClassBuddy()
                 .redefineMethod(m, CurrentTimeMillisInterceptor.class)
-                .apply();
+                .install();
         assertEquals(0, System.currentTimeMillis());
         Thread.sleep(5);
         assertEquals(0, System.currentTimeMillis());
@@ -46,7 +46,7 @@ public class ClassBuddyTest {
         Method m = Hello.class.getMethod("bonjour", String.class);
         new ClassBuddy()
                 .redefineMethod(m, HelloInterceptor.class)
-                .apply();
+                .install();
         assertEquals("Bonjour/Hi Obama", new Hello().bonjour("Obama"));
     }
 }
