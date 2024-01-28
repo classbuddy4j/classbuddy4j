@@ -49,4 +49,18 @@ public class ClassBuddyTest {
                 .install();
         assertEquals("Bonjour/Hi Obama", new Hello().bonjour("Obama"));
     }
+
+    @Test
+    void interceptorThrowsException() throws Exception {
+        ThrowExceptionBean bean = new ThrowExceptionBean();
+        assertEquals(bean.getInt(), 5);
+        Method m = ThrowExceptionBean.class.getMethod("getInt");
+        new ClassBuddy()
+                .redefineMethod(m, ThrowExceptionInterceptor.class)
+                .install();
+        assertThatThrownBy(() -> {
+            bean.getInt();
+        }).isInstanceOf(RuntimeException.class)
+          .hasMessage("thrown from ThrowExceptionInterceptor");
+    }
 }
