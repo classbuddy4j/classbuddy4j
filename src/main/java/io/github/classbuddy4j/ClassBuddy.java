@@ -44,11 +44,11 @@ public class ClassBuddy {
         return this;
     }
 
-    public void install() {
-        installOn(ByteBuddyAgent.install());
+    public Instrumentation install() {
+        return installOn(ByteBuddyAgent.install());
     }
 
-    protected void installOn(final Instrumentation instrumentation) {
+    protected Instrumentation installOn(final Instrumentation instrumentation) {
 
         if (isBootstrap(this.targetMethod)) {
             ByteBuddyUtil.injectBootstrapClasses(instrumentation, interceptorClass);
@@ -81,6 +81,7 @@ public class ClassBuddy {
                 .transform(transformer);
 
         agentBuilder.installOn(instrumentation);
+        return instrumentation;
     }
 
     static private boolean isBootstrap(final Method m) {
