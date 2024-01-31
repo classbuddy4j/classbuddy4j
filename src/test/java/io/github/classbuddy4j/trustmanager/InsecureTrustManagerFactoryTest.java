@@ -6,6 +6,8 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
+import java.security.cert.X509Certificate;
+
 import static io.github.classbuddy4j.trustmanager.InsecureTrustManagerFactory.DEFAULT_ALGORITHM;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -25,7 +27,8 @@ public class InsecureTrustManagerFactoryTest {
         TrustManager[] managers = insecureTmf.getTrustManagers();
         assertThat(managers).hasSize(1);
         X509TrustManager trustManager = (X509TrustManager) managers[0];
-        trustManager.checkClientTrusted(null, null);
-        trustManager.checkServerTrusted(null, null);
+        X509Certificate[] chain = new X509Certificate[0];
+        trustManager.checkClientTrusted(chain, null);
+        trustManager.checkServerTrusted(chain, null);
     }
 }
