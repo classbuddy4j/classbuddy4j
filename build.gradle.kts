@@ -3,6 +3,7 @@ plugins {
 }
 
 group = "io.github.classbuddy4j"
+description = "classbuddy4j"
 version = "0.0.1-SNAPSHOT"
 
 repositories {
