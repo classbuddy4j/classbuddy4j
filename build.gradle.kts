@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
 group = "io.github.classbuddy4j"
