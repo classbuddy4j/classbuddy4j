@@ -1,3 +1,6 @@
+
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id("java")
     id("com.vanniktech.maven.publish") version "0.27.0"
@@ -25,4 +28,10 @@ tasks.test {
     useJUnitPlatform()
     failFast = true
     maxParallelForks = 1
+}
+
+mavenPublishing {
+  publishToMavenCentral(SonatypeHost.DEFAULT)
+
+  signAllPublications()
 }
