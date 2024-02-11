@@ -2,7 +2,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-    id("java")
+    id("java-library")
     id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
