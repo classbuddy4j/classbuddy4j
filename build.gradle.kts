@@ -15,6 +15,9 @@ plugins {
     id("java-library")
 }
 
+apply(from="gradle/java-publication.gradle")
+apply(from="gradle/shipkit.gradle")
+
 group = "io.github.classbuddy4j"
 description = "classbuddy4j"
 version = "0.0.1-SNAPSHOT"
