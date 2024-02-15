@@ -39,10 +39,10 @@ nexusPublishing {
 apply plugin: 'com.gradleup.nmcp'
 nmcp {
     publish("javaLibrary") {
-        if (System.getenv("NEXUS_TOKEN_PWD")) {
-            username = System.getenv("NEXUS_TOKEN_USER")
-            password = System.getenv("NEXUS_TOKEN_PWD")
-            publicationType = "AUTOMATIC"
+        if (System.getenv('NEXUS_TOKEN_PWD')) {
+            username = System.getenv('NEXUS_TOKEN_USER')
+            password = System.getenv('NEXUS_TOKEN_PWD')
+            publicationType = 'AUTOMATIC'
         }
     }
 }
