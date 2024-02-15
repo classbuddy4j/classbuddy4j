@@ -36,6 +36,17 @@ nexusPublishing {
     }
 }
 
+apply plugin: 'com.gradleup.nmcp'
+nmcp {
+    publish("javaLibrary") {
+        if (System.getenv("NEXUS_TOKEN_PWD")) {
+            username = System.getenv("NEXUS_TOKEN_USER")
+            password = System.getenv("NEXUS_TOKEN_PWD")
+            publicationType = "AUTOMATIC"
+        }
+    }
+}
+
 def isSnapshot = version.endsWith("-SNAPSHOT")
 if (isSnapshot) {
     tasks.named("githubRelease") {

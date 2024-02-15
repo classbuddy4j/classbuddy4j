@@ -8,6 +8,7 @@ buildscript {
         classpath("org.shipkit:shipkit-changelog:2.0.1")
         classpath("org.shipkit:shipkit-auto-version:2.0.4")
         classpath("io.github.gradle-nexus:publish-plugin:2.0.0-rc-2")
+        classpath("com.gradleup.nmcp:nmcp:0.0.4")
     }
 }
 
