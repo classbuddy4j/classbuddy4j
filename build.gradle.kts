@@ -1,9 +1,18 @@
 
-import com.vanniktech.maven.publish.SonatypeHost
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath("org.shipkit:shipkit-changelog:2.0.1")
+        classpath("org.shipkit:shipkit-auto-version:2.0.4")
+        classpath("io.github.gradle-nexus:publish-plugin:2.0.0-rc-2")
+    }
+}
 
 plugins {
     id("java-library")
-    id("com.vanniktech.maven.publish") version "0.27.0"
 }
 
 group = "io.github.classbuddy4j"
@@ -28,10 +37,4 @@ tasks.test {
     useJUnitPlatform()
     failFast = true
     maxParallelForks = 1
-}
-
-mavenPublishing {
-  publishToMavenCentral(SonatypeHost.DEFAULT)
-
-  signAllPublications()
 }
