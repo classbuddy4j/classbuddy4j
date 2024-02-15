@@ -109,6 +109,7 @@ plugins.withId("java") {
 apply plugin: 'signing' //https://docs.gradle.org/current/userguide/signing_plugin.html
 signing {
     if (System.getenv('PGP_KEY')) {
+        println("yes, pgp ok")
         useInMemoryPgpKeys(System.getenv('PGP_KEY'), System.getenv('PGP_PWD'))
         sign publishing.publications.javaLibrary
     }

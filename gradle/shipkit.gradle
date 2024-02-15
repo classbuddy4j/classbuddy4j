@@ -25,6 +25,7 @@ apply plugin: 'io.github.gradle-nexus.publish-plugin'
 nexusPublishing {
     repositories {
         if (System.getenv('NEXUS_TOKEN_PWD')) {
+            println("yes nexus")
             sonatype {
                 nexusUrl = uri('https://s01.oss.sonatype.org/service/local/')
                 snapshotRepositoryUrl = uri('https://s01.oss.sonatype.org/content/repositories/snapshots/')
