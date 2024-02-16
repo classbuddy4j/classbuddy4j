@@ -19,7 +19,7 @@ plugins {
     id("com.gradleup.nmcp").version("0.0.4")
 }
 
-apply(from="gradle/java-publication.gradle")
+apply(from="gradle/java-publication.gradle.kts")
 apply(from="gradle/shipkit.gradle")
 
 group = "io.github.classbuddy4j"
