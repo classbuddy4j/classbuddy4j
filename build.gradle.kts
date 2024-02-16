@@ -13,8 +13,9 @@ buildscript {
 }
 
 plugins {
-    id("java")
-    id("java-library")
+    java
+    `java-library`
+    `maven-publish`
     id("com.gradleup.nmcp").version("0.0.4")
 }
 
