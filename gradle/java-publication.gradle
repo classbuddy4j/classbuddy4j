@@ -1,4 +1,4 @@
-group = 'io.github.classbuddy4j'
+group = "io.github.classbuddy4j"
 
 plugins.withId("java") {
     //Sources/javadoc artifacts required by Maven module publications
@@ -8,13 +8,13 @@ plugins.withId("java") {
     }
 
     task sourcesJar(type: Jar, dependsOn: classes) {
-        archiveClassifier = 'sources'
+        archiveClassifier = "sources"
         from sourceSets.main.allSource
         with licenseSpec
     }
 
     task javadocJar(type: Jar, dependsOn: javadoc) {
-        archiveClassifier = 'javadoc'
+        archiveClassifier = "javadoc"
         from tasks.javadoc
         with licenseSpec
     }
@@ -57,41 +57,41 @@ publishing {
                 }
 
                 plugins.withId("java") {
-                    //Gradle does not write 'jar' packaging to the pom (unlike other packaging types).
-                    //This is OK because 'jar' is implicit/default:
+                    //Gradle does not write "jar" packaging to the pom (unlike other packaging types).
+                    //This is OK because "jar" is implicit/default:
                     // https://maven.apache.org/guides/introduction/introduction-to-the-pom.html#minimal-pom
-                    packaging = 'jar'
+                    packaging = "jar"
                 }
 
                 url = "https://github.com/classbuddy4j/classbuddy4j"
                 licenses {
                     license {
-                        name = 'Apache License version 2.0'
-                        url = 'https://github.com/classbuddy4j/classbuddy4j/blob/main/LICENSE'
-                        distribution = 'repo'
+                        name = "Apache License version 2.0"
+                        url = "https://github.com/classbuddy4j/classbuddy4j/blob/main/LICENSE"
+                        distribution = "repo"
                     }
                 }
                 developers {
-                    ['sullis:Sean Sullivan'].each { devData ->
+                    ["sullis:Sean Sullivan"].each { devData ->
                         developer {
-                            def devInfo = devData.split(':')
+                            def devInfo = devData.split(":")
                             id = devInfo[0]
                             name = devInfo[1]
-                            url = 'https://github.com/' + devInfo[0]
+                            url = "https://github.com/" + devInfo[0]
                             roles = ["Core developer"]
                         }
                     }
                 }
                 scm {
-                    url = 'https://github.com/classbuddy4j/classbuddy4j.git'
+                    url = "https://github.com/classbuddy4j/classbuddy4j.git"
                 }
                 issueManagement {
-                    url = 'https://github.com/classbuddy4j/classbuddy4j/issues'
-                    system = 'GitHub issues'
+                    url = "https://github.com/classbuddy4j/classbuddy4j/issues"
+                    system = "GitHub issues"
                 }
                 ciManagement {
-                    url = 'https://github.com/classbuddy4j/classbuddy4j/actions'
-                    system = 'GH Actions'
+                    url = "https://github.com/classbuddy4j/classbuddy4j/actions"
+                    system = "GH Actions"
                 }
             }
         }
@@ -106,11 +106,11 @@ plugins.withId("java") {
 //    tasks.build.dependsOn("publishJavaLibraryPublicationToMavenLocal")
 }
 
-apply plugin: 'signing' //https://docs.gradle.org/current/userguide/signing_plugin.html
+apply plugin: "signing" //https://docs.gradle.org/current/userguide/signing_plugin.html
 signing {
-    if (System.getenv('PGP_KEY')) {
+    if (System.getenv("PGP_KEY")) {
         println("yes, pgp ok")
-        useInMemoryPgpKeys(System.getenv('PGP_KEY'), System.getenv('PGP_PWD'))
+        useInMemoryPgpKeys(System.getenv("PGP_KEY"), System.getenv("PGP_PWD"))
         sign publishing.publications.javaLibrary
     }
 }

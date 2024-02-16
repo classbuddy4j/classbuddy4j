@@ -1,14 +1,14 @@
-apply plugin: 'org.shipkit.shipkit-auto-version'
-apply plugin: 'org.shipkit.shipkit-changelog'
-apply plugin: 'org.shipkit.shipkit-github-release'
+apply plugin: "org.shipkit.shipkit-auto-version"
+apply plugin: "org.shipkit.shipkit-changelog"
+apply plugin: "org.shipkit.shipkit-github-release"
 
-tasks.named('generateChangelog') {
-    previousRevision = project.ext.'shipkit-auto-version.previous-tag'
-    githubToken = System.getenv('GITHUB_TOKEN')
-    repository = 'classbuddy4j/classbuddy4j'
+tasks.named("generateChangelog") {
+    previousRevision = project.ext."shipkit-auto-version.previous-tag"
+    githubToken = System.getenv("GITHUB_TOKEN")
+    repository = "classbuddy4j/classbuddy4j"
     // Workarounds for https://github.com/shipkit/shipkit-changelog/issues/103
     doNotTrackState("GenerateChangelogTask tracks the entire repo, which results is locking problems hashing the .gradle folder.")
-    // GenerateChangelogTask uses the entire repo as input, which means it needs to "depend on" all other tasks' outputs.
+    // GenerateChangelogTask uses the entire repo as input, which means it needs to "depend on" all other tasks" outputs.
     mustRunAfter(allprojects.collectMany { it.tasks }.grep { it.path != ":generateChangelog" && it.path != ":githubRelease" })
 }
 
@@ -21,29 +21,29 @@ tasks.named("githubRelease") {
     githubToken = System.getenv("GITHUB_TOKEN")
 }
 
-apply plugin: 'io.github.gradle-nexus.publish-plugin'
+apply plugin: "io.github.gradle-nexus.publish-plugin"
 nexusPublishing {
     repositories {
-        if (System.getenv('NEXUS_TOKEN_PWD')) {
+        if (System.getenv("NEXUS_TOKEN_PWD")) {
             println("yes nexus")
             sonatype {
-                nexusUrl = uri('https://s01.oss.sonatype.org/service/local/')
-                snapshotRepositoryUrl = uri('https://s01.oss.sonatype.org/content/repositories/snapshots/')
-                username = System.getenv('NEXUS_TOKEN_USER')
-                password = System.getenv('NEXUS_TOKEN_PWD')
+                nexusUrl = uri("https://s01.oss.sonatype.org/service/local/")
+                snapshotRepositoryUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                username = System.getenv("NEXUS_TOKEN_USER")
+                password = System.getenv("NEXUS_TOKEN_PWD")
             }
         }
     }
 }
 
-apply plugin: 'com.gradleup.nmcp'
+apply plugin: "com.gradleup.nmcp"
 
 nmcp {
-    if (System.getenv('NEXUS_TOKEN_PWD')) {
+    if (System.getenv("NEXUS_TOKEN_PWD")) {
         publish("javaLibrary") { }
-            // username = System.getenv('NEXUS_TOKEN_USER')
-            // password = System.getenv('NEXUS_TOKEN_PWD')
-            // publicationType = 'AUTOMATIC'
+            // username = System.getenv("NEXUS_TOKEN_USER")
+            // password = System.getenv("NEXUS_TOKEN_PWD")
+            // publicationType = "AUTOMATIC"
     }
 }
 
