@@ -48,7 +48,7 @@ public class ClassBuddy {
         return installOn(ByteBuddyAgent.install());
     }
 
-    protected Instrumentation installOn(final Instrumentation instrumentation) {
+    public Instrumentation installOn(final Instrumentation instrumentation) {
 
         if (isBootstrap(this.targetMethod)) {
             ByteBuddyUtil.injectBootstrapClasses(instrumentation, interceptorClass);

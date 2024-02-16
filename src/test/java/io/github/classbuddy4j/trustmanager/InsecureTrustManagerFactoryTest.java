@@ -31,7 +31,7 @@ public class InsecureTrustManagerFactoryTest {
     }
 
     @Test
-    void install() throws Exception {
+    void getInstance_algorithm() throws Exception {
         TrustManagerFactory insecureTmf = TrustManagerFactory.getInstance(DEFAULT_ALGORITHM);
         assertNotNull(insecureTmf);
         assertThat(insecureTmf.getClass().getSimpleName()).isEqualTo("InsecureTrustManagerFactory");

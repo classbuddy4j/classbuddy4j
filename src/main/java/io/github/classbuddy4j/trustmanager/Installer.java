@@ -10,9 +10,11 @@ import java.lang.reflect.Method;
 public class Installer {
     public static void installInsecureTrustManagerFactory() {
         try {
-            Method m = TrustManagerFactory.class.getMethod("getInstance", String.class);
-            Instrumentation instrumentation = new ClassBuddy().redefineMethod(m, TrustManagerFactoryInterceptor.class)
+            Method m1 = TrustManagerFactory.class.getMethod("getInstance", String.class);
+            Method m2 = TrustManagerFactory.class.getMethod("getInstance", String.class, String.class);
+            Instrumentation instrumentation = new ClassBuddy().redefineMethod(m1, TrustManagerFactoryInterceptor.class)
                     .install();
+            new ClassBuddy().redefineMethod(m2, TrustManagerFactoryInterceptor.class).installOn(instrumentation);
             ByteBuddyUtil.injectBootstrapClasses(instrumentation,
                     TrustManagerFactoryInterceptor.class,
                     InsecureTrustManager.class,
