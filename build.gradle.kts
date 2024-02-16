@@ -20,7 +20,7 @@ plugins {
 }
 
 apply(from="gradle/java-publication.gradle.kts")
-apply(from="gradle/shipkit.gradle")
+apply(from="gradle/shipkit.gradle.kts")
 
 group = "io.github.classbuddy4j"
 description = "classbuddy4j"
@@ -44,4 +44,14 @@ tasks.test {
     useJUnitPlatform()
     failFast = true
     maxParallelForks = 1
+}
+
+nmcp {
+    if (System.getenv("NEXUS_TOKEN_PWD") != null) {
+        publish("mavenJava") {
+            username = System.getenv("NEXUS_TOKEN_USER")
+            password = System.getenv("NEXUS_TOKEN_PWD")
+            publicationType = "AUTOMATIC"
+        }
+    }
 }
