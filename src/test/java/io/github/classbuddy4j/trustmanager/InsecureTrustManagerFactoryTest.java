@@ -32,23 +32,20 @@ public class InsecureTrustManagerFactoryTest {
 
     @Test
     void getInstance_algorithm() throws Exception {
-        TrustManagerFactory insecureTmf = TrustManagerFactory.getInstance(DEFAULT_ALGORITHM);
-        assertNotNull(insecureTmf);
-        assertThat(insecureTmf.getClass().getSimpleName()).isEqualTo("InsecureTrustManagerFactory");
-        TrustManager[] managers = insecureTmf.getTrustManagers();
-        assertThat(managers).hasSize(1);
-        X509TrustManager trustManager = (X509TrustManager) managers[0];
-        X509Certificate[] chain = new X509Certificate[0];
-        trustManager.checkClientTrusted(chain, null);
-        trustManager.checkServerTrusted(chain, null);
+        TrustManagerFactory tmf = TrustManagerFactory.getInstance(DEFAULT_ALGORITHM);
+        verifyInsecureTrustManagerFactory(tmf);
     }
 
     @Test
     void getInstance_algorithm_provider() throws Exception {
-        TrustManagerFactory insecureTmf = TrustManagerFactory.getInstance(DEFAULT_ALGORITHM, "aaaProvider");
-        assertNotNull(insecureTmf);
-        assertThat(insecureTmf.getClass().getSimpleName()).isEqualTo("InsecureTrustManagerFactory");
-        TrustManager[] managers = insecureTmf.getTrustManagers();
+        TrustManagerFactory tmf = TrustManagerFactory.getInstance(DEFAULT_ALGORITHM, "aaaProvider");
+        verifyInsecureTrustManagerFactory(tmf);
+    }
+
+    private static void verifyInsecureTrustManagerFactory(final TrustManagerFactory tmf) throws Exception {
+        assertNotNull(tmf);
+        assertThat(tmf.getClass().getSimpleName()).isEqualTo("InsecureTrustManagerFactory");
+        TrustManager[] managers = tmf.getTrustManagers();
         assertThat(managers).hasSize(1);
         X509TrustManager trustManager = (X509TrustManager) managers[0];
         X509Certificate[] chain = new X509Certificate[0];
