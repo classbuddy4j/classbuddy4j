@@ -15,6 +15,7 @@ buildscript {
 plugins {
     id("java")
     id("java-library")
+    id("com.gradleup.nmcp").version("0.0.4")
 }
 
 apply(from="gradle/java-publication.gradle")
