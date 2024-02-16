@@ -47,7 +47,7 @@ configure<PublishingExtension> {
                 }
 
                 afterEvaluate {
-//                    artifactId = tasks.named<Jar>("jar").archiveBaseName.get()
+                    artifactId = "classbuddy4j" //  tasks.named<Jar>("jar").archiveBaseName.get()
                 }
 
                 pom {
