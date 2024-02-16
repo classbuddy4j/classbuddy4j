@@ -44,6 +44,19 @@ public class InsecureTrustManagerFactoryTest {
     }
 
     @Test
+    void getInstance_algorithm_provider() throws Exception {
+        TrustManagerFactory insecureTmf = TrustManagerFactory.getInstance(DEFAULT_ALGORITHM, "aaaProvider");
+        assertNotNull(insecureTmf);
+        assertThat(insecureTmf.getClass().getSimpleName()).isEqualTo("InsecureTrustManagerFactory");
+        TrustManager[] managers = insecureTmf.getTrustManagers();
+        assertThat(managers).hasSize(1);
+        X509TrustManager trustManager = (X509TrustManager) managers[0];
+        X509Certificate[] chain = new X509Certificate[0];
+        trustManager.checkClientTrusted(chain, null);
+        trustManager.checkServerTrusted(chain, null);
+    }
+
+    @Test
     void exceptionThrownWhenAlgorithmIsBogus() {
         assertThatThrownBy(() -> { TrustManagerFactory.getInstance("bogus"); })
                 .isInstanceOf(NoSuchAlgorithmException.class)
