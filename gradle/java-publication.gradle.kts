@@ -52,9 +52,7 @@ configure<PublishingExtension> {
 
                 pom {
                     name = artifactId
-                    afterEvaluate {
-                        description = project.description
-                    }
+                    description = "classbuddy4j"
 
                     plugins.withId("java") {
                         //Gradle does not write "jar" packaging to the pom (unlike other packaging types).
