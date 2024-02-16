@@ -1,5 +1,7 @@
 package io.github.classbuddy4j.trustmanager;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.net.ssl.TrustManager;
@@ -13,18 +15,25 @@ import static io.github.classbuddy4j.trustmanager.InsecureTrustManagerFactory.DE
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 public class InsecureTrustManagerFactoryTest {
 
-    @Test
-    void install() throws Exception {
+    @BeforeAll
+    static void beforeAll() throws Exception {
         TrustManagerFactory defaultTmf = TrustManagerFactory.getInstance(DEFAULT_ALGORITHM);
         assertNotNull(defaultTmf);
+    }
+
+    @BeforeEach
+    void beforeEach() throws Exception {
         Installer.installInsecureTrustManagerFactory();
+        assertThat(TrustManagerFactory.getInstance(DEFAULT_ALGORITHM)).isNotNull();
+    }
+
+    @Test
+    void install() throws Exception {
         TrustManagerFactory insecureTmf = TrustManagerFactory.getInstance(DEFAULT_ALGORITHM);
         assertNotNull(insecureTmf);
-        assertNotSame(defaultTmf, insecureTmf);
         assertThat(insecureTmf.getClass().getSimpleName()).isEqualTo("InsecureTrustManagerFactory");
         TrustManager[] managers = insecureTmf.getTrustManagers();
         assertThat(managers).hasSize(1);
@@ -38,7 +47,7 @@ public class InsecureTrustManagerFactoryTest {
     void exceptionThrownWhenAlgorithmIsBogus() {
         assertThatThrownBy(() -> { TrustManagerFactory.getInstance("bogus"); })
                 .isInstanceOf(NoSuchAlgorithmException.class)
-                .hasMessage("bogus TrustManagerFactory not available");
+                .hasMessage("algorithm bogus is not supported");
     }
 
     @Test
