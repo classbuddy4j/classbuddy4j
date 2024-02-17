@@ -45,6 +45,12 @@ tasks.test {
     maxParallelForks = 1
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
 nmcp {
     if (System.getenv("NEXUS_TOKEN_PWD") != null) {
         publish("mavenJava") {
