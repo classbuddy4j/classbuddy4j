@@ -8,7 +8,7 @@ classbuddy4j is a Java library
 <dependency>
     <groupId>io.github.classbuddy4j</groupId>
     <artifactId>classbuddy4j</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
     <scope>test</scope>
 </dependency>
 
