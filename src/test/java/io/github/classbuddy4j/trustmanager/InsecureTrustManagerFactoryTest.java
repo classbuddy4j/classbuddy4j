@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 
 import static io.github.classbuddy4j.trustmanager.InsecureTrustManagerFactory.DEFAULT_ALGORITHM;
+import static io.github.classbuddy4j.trustmanager.Installer.installInsecureTrustManagerFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -26,8 +27,7 @@ public class InsecureTrustManagerFactoryTest {
 
     @BeforeEach
     void beforeEach() throws Exception {
-        Installer.installInsecureTrustManagerFactory();
-        assertThat(TrustManagerFactory.getInstance(DEFAULT_ALGORITHM)).isNotNull();
+        installInsecureTrustManagerFactory();
     }
 
     @Test
