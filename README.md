@@ -1,6 +1,4 @@
-# classbuddy4j 
-
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.classbuddy4j/classbuddy4j.svg)](https://search.maven.org/artifact/io.github.classbuddy4j/classbuddy4j)
+# classbuddy4j [![Maven Central](https://img.shields.io/maven-central/v/io.github.classbuddy4j/classbuddy4j.svg)](https://search.maven.org/artifact/io.github.classbuddy4j/classbuddy4j)
 
 classbuddy4j is a Java library
 
@@ -10,7 +8,7 @@ classbuddy4j is a Java library
 <dependency>
     <groupId>io.github.classbuddy4j</groupId>
     <artifactId>classbuddy4j</artifactId>
-    <version>0.0.6</version>
+    <version>x.y.z</version>
     <scope>test</scope>
 </dependency>
 
