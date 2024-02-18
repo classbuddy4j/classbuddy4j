@@ -1,4 +1,6 @@
-# classbuddy4j [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.classbuddy4j/classbuddy4j/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/io.github.classbuddy4j/classbuddy4j)
+# classbuddy4j 
+
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.classbuddy4j/classbuddy4j.svg)](https://search.maven.org/artifact/io.github.classbuddy4j/classbuddy4j)
 
 classbuddy4j is a Java library
 
