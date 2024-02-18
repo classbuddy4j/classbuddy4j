@@ -1,10 +1,14 @@
 package io.github.classbuddy4j;
 
+import net.bytebuddy.agent.ByteBuddyAgent;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
+import java.lang.instrument.Instrumentation;
 import java.lang.reflect.Method;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -62,5 +66,14 @@ public class ClassBuddyTest {
             bean.getInt();
         }).isInstanceOf(RuntimeException.class)
           .hasMessage("thrown from ThrowExceptionInterceptor");
+    }
+
+    @AfterAll
+    static void afterAllTests() {
+        Instrumentation instrumentation = ByteBuddyAgent.getInstrumentation();
+        assertThat(instrumentation.isRedefineClassesSupported()).isTrue();
+        assertThat(instrumentation.getAllLoadedClasses()).contains(
+                Hello.class,
+                HelloInterceptor.class);
     }
 }
