@@ -19,4 +19,4 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
     - name: Build
-      run: mvn -ntp -B clean test
+      run: ./gradlew clean build
