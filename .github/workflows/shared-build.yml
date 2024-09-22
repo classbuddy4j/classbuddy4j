@@ -17,6 +17,6 @@ jobs:
       with:
         java-version: ${{ matrix.java }}
         distribution: 'temurin'
-        cache: 'maven'
+        cache: 'gradle'
     - name: Build
       run: ./gradlew clean build
