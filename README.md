@@ -2,6 +2,8 @@
 
 classbuddy4j is a Java library
 
+# THIS IS AN EXPERIMENTAL LIBRARY. DANGER!
+
 # Maven usage
 
 ```
