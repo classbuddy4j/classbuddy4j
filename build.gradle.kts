@@ -29,7 +29,7 @@ repositories {
     mavenCentral()
 }
 
-val byteBuddyVersion = "1.15.11"
+val byteBuddyVersion = "1.16.1"
 
 dependencies {
     implementation("net.bytebuddy:byte-buddy:$byteBuddyVersion")
