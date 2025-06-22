@@ -34,7 +34,7 @@ val byteBuddyVersion = "1.17.5"
 dependencies {
     implementation("net.bytebuddy:byte-buddy:$byteBuddyVersion")
     implementation("net.bytebuddy:byte-buddy-agent:$byteBuddyVersion")
-    testImplementation(platform("org.junit:junit-bom:5.12.2"))
+    testImplementation(platform("org.junit:junit-bom:5.13.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core:3.27.3")
 }
